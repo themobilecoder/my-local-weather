@@ -29,33 +29,28 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        SizedBox(
-                          height: 20,
-                        ),
                         Text(
                           'Clear',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey.shade50,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                          ),
+                              fontFamily: 'Montserrat',
+                              fontSize: 18,
+                              color: Colors.grey.shade50),
                         ),
                         SizedBox(height: 10),
                         Icon(
                           WeatherIcons.day_sunny,
-                          size: 72,
+                          size: 62,
                           color: Colors.yellow,
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
                         Text(
                           '19°',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 64,
-                            color: Colors.grey.shade50,
-                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Montserrat',
+                            fontSize: 72,
+                            color: Colors.white
                           ),
                         ),
                       ],
@@ -90,10 +85,9 @@ class _HomePageState extends State<HomePage> {
                     'SYDNEY, AUSTRALIA',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey.shade800,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w800,
+                      fontFamily: 'Montserrat',
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
