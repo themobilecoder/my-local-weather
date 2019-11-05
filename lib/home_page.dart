@@ -19,45 +19,63 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: ClipPath(
-              clipper: WaveClipper(),
-              child: Container(
-                color: Colors.blue,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
+            flex: 2,
+            child: Stack(
+              children: <Widget>[
+                ClipPath(
+                  clipper: WaveClipper(),
+                  child: Container(
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Clear',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey.shade50,
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Icon(
+                          WeatherIcons.day_sunny,
+                          size: 72,
+                          color: Colors.yellow,
+                        ),
+                        SizedBox(height: 40),
+                        Text(
+                          '19°',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 64,
+                            color: Colors.grey.shade50,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Clear',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey.shade50,
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Icon(
-                      WeatherIcons.day_sunny,
-                      size: 72,
-                      color: Colors.yellow,
-                    ),
-                    SizedBox(height: 40),
-                    Text(
-                      '19°',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 64,
-                        color: Colors.grey.shade50,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      tooltip: 'Add Location',
+                      child: Icon(Icons.add),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.yellow.shade700,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(
@@ -83,12 +101,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Refresh',
-        child: Icon(Icons.refresh),
-        backgroundColor: Colors.red,
       ),
     );
   }
