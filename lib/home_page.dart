@@ -5,14 +5,9 @@ import 'package:flutter_unit_testing/wave_clipper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:weather_icons/weather_icons.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  RefreshController _controller = RefreshController(initialRefresh: false);
+class HomePage extends StatelessWidget {
+  final RefreshController _controller =
+      RefreshController(initialRefresh: false);
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
     _controller.refreshCompleted();
