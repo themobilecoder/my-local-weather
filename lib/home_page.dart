@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_unit_testing/wave_clipper.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,26 +98,5 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
-}
-
-class WaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    var heightToCut = size.height;
-    path.lineTo(0, heightToCut);
-    path.quadraticBezierTo(
-        size.width / 4, heightToCut - 40, size.width / 2, heightToCut - 20);
-    path.quadraticBezierTo(
-        3 / 4 * size.width, heightToCut, size.width, heightToCut - 35);
-    path.lineTo(size.width, 0);
-    path.close(); // this closes the loop from current position to the starting point of widget
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }
