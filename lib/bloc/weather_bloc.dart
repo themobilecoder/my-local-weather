@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_unit_testing/weather_event.dart';
-import 'package:flutter_unit_testing/weather_model.dart';
+import 'package:flutter_unit_testing/bloc/weather_event.dart';
+import 'package:flutter_unit_testing/bloc/weather_model.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class WeatherBloc {
@@ -21,7 +21,7 @@ class WeatherBloc {
     if (event is RequestWeatherEvent) {
       final temp = Random().nextInt(30);
       await Future.delayed(Duration(seconds: 2));
-      _inputWeatherModel.add(WeatherModel(temp, 'SYDNEY, AUSTRALIA', WeatherIcons.day_sunny));
+      _inputWeatherModel.add(WeatherModel(temp, 'SYDNEY, AUSTRALIA', WeatherIcons.day_sunny, []));
     }
   }
 
