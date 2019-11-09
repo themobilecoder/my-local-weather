@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_unit_testing/wave_clipper.dart';
+import 'package:flutter_unit_testing/bottom_wave_clipper.dart';
 import 'package:flutter_unit_testing/weather_bloc.dart';
 import 'package:flutter_unit_testing/weather_event.dart';
 import 'package:flutter_unit_testing/weather_model.dart';
@@ -28,6 +28,35 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  List<Widget> _buildWeeklyWeather() {
+    return List.filled(
+        5,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Now',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    letterSpacing: 1,
+                    fontSize: 12,
+                    color: Colors.blue.shade800,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Icon(
+                WeatherIcons.day_snow_thunderstorm,
+                color: Colors.grey,
+                size: 18,
+              ),
+            ],
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     children: <Widget>[
                       ClipPath(
-                        clipper: WaveClipper(),
+                        clipper: BottomWaveClipper(),
                         child: Container(
                           color: Colors.blue,
                           child: Column(
@@ -101,15 +130,28 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           height: 20,
                         ),
-                        Text(
-                          data.location,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              letterSpacing: 1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Text(
+                            data.location,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                letterSpacing: 1,
+                                fontSize: 18,
+                                color: Colors.blue.shade800,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: _buildWeeklyWeather(),
+                          ),
+                        )
                       ],
                     ),
                   ),
