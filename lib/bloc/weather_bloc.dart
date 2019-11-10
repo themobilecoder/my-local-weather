@@ -15,13 +15,15 @@ class WeatherBloc {
 
   Stream<WeatherModel> get weatherModel => _weatherStateController.stream;
   Sink<WeatherEvent> get inputWeatherEvent => _weatherEventController.sink;
-  Sink<WeatherModel> get _inputWeatherModel => _weatherStateController.sink;
+  StreamSink<WeatherModel> get _inputWeatherModel =>
+      _weatherStateController.sink;
 
   void _handleEvent(WeatherEvent event) async {
     if (event is RequestWeatherEvent) {
       final temp = Random().nextInt(30);
       await Future.delayed(Duration(seconds: 2));
-      _inputWeatherModel.add(WeatherModel(temp, 'SYDNEY, AUSTRALIA', WeatherIcons.day_sunny, []));
+      _inputWeatherModel.add(
+          WeatherModel(temp, 'SYDNEY, AUSTRALIA', WeatherIcons.day_sunny, []));
     }
   }
 
