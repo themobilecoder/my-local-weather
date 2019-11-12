@@ -6,6 +6,7 @@ import 'package:flutter_unit_testing/bloc/weather_event.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
 import 'package:flutter_unit_testing/widgets/bottom_wave_clipper.dart';
 import 'package:flutter_unit_testing/widgets/five_day_weather_widget.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                         ClipPath(
                           clipper: BottomWaveClipper(),
                           child: Container(
-                            color: Colors.blue,
+                            color: Colors.blue.shade400,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                                     Icon(
                                       weatherModel.weatherIcon,
                                       size: 62,
-                                      color: Colors.yellow,
+                                      color: Colors.white,
                                     ),
                                     SizedBox(width: 20),
                                     Text(
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 SizedBox(height: 10),
                                 Text(
-                                  'Clear',
+                                  weatherModel.condition,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: 'Montserrat',
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                           child: Container(
                             alignment: Alignment.topCenter,
                             child: Text(
-                              'Thursday, July 28',
+                              DateFormat('EEEE, MMMM d').format(DateTime.now()),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                                   fontFamily: 'Montserrat',
                                   letterSpacing: 1,
                                   fontSize: 18,
-                                  color: Colors.blue.shade800,
+                                  color: Colors.black87,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -141,7 +142,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: FiveDayWeatherWidget([]),
+                            child: FiveDayWeatherWidget(
+                                weatherModel.weatherForcasts),
                           )
                         ],
                       ),
@@ -161,6 +163,7 @@ class _HomePageState extends State<HomePage> {
       controller: _controller,
       onRefresh: _onRefresh,
       enablePullDown: true,
+      header: MaterialClassicHeader(),
       child: Container(
         color: Colors.blue,
         child: Center(
