@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:flutter_unit_testing/bloc/weather_event.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:flutter_unit_testing/repository/location_repository.dart';
 import 'package:flutter_unit_testing/repository/weather_repository.dart';
+import 'package:geolocator/geolocator.dart';
 
 class WeatherBloc {
   final _weatherStateController = StreamController<WeatherModel>();
   final _weatherEventController = StreamController<WeatherEvent>();
   final _weatherRepository = WeatherRepository();
+  final _locationRepository = LocationRepository();
 
   WeatherBloc() {
     _weatherEventController.stream.listen(_handleEvent);
@@ -20,7 +23,10 @@ class WeatherBloc {
 
   void _handleEvent(WeatherEvent event) async {
     try {
-      final weather = await _weatherRepository.getWeather();
+      final Position currentLocation =
+          await _locationRepository.getCurrentLocation();
+      final weather = await _weatherRepository.getWeatherWithLocation(
+          currentLocation.latitude, currentLocation.longitude);
       _inputWeatherModel.add(weather);
     } catch (e) {
       _inputWeatherModel.addError(e);
