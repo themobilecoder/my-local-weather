@@ -1,13 +1,13 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter_unit_testing/bloc/weather_event.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:weather_icons/weather_icons.dart';
+import 'package:flutter_unit_testing/repository/weather_repository.dart';
 
 class WeatherBloc {
   final _weatherStateController = StreamController<WeatherModel>();
   final _weatherEventController = StreamController<WeatherEvent>();
+  final _weatherRepository = WeatherRepository();
 
   WeatherBloc() {
     _weatherEventController.stream.listen(_handleEvent);
@@ -19,11 +19,11 @@ class WeatherBloc {
       _weatherStateController.sink;
 
   void _handleEvent(WeatherEvent event) async {
-    if (event is RequestWeatherEvent) {
-      final temp = Random().nextInt(30);
-      await Future.delayed(Duration(seconds: 2));
-      _inputWeatherModel.add(
-          WeatherModel(temp, 'SYDNEY, AUSTRALIA', WeatherIcons.day_sunny, []));
+    try {
+      final weather = await _weatherRepository.getWeather();
+      _inputWeatherModel.add(weather);
+    } catch (e) {
+      _inputWeatherModel.addError(e);
     }
   }
 
