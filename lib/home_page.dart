@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_unit_testing/bloc/fetch_weather_event.dart';
 import 'package:flutter_unit_testing/bloc/weather_bloc.dart';
-import 'package:flutter_unit_testing/bloc/weather_event.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:flutter_unit_testing/repository/geolocator_repository.dart';
+import 'package:flutter_unit_testing/repository/metawather_repository.dart';
 import 'package:flutter_unit_testing/widgets/bottom_wave_clipper.dart';
 import 'package:flutter_unit_testing/widgets/five_day_weather_widget.dart';
 import 'package:intl/intl.dart';
@@ -17,10 +20,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final RefreshController _controller =
       RefreshController(initialRefresh: false);
-  final WeatherBloc weatherBloc = WeatherBloc();
+  final WeatherBloc weatherBloc =
+      WeatherBloc(MetaweatherRepository(Dio()), GeolocatorRepository());
 
-  void _onRefresh() async {
-    weatherBloc.inputWeatherEvent.add(RequestWeatherEvent());
+  void _fetchData() async {
+    weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());
   }
 
   @override
@@ -40,13 +44,13 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasError) {
             return _buildErrorWidget();
           } else if (!snapshot.hasData) {
-            weatherBloc.inputWeatherEvent.add(RequestWeatherEvent());
+            _fetchData();
             return _buildLoadingWidget();
           } else {
             final weatherModel = snapshot.data as WeatherModel;
             return SmartRefresher(
               controller: _controller,
-              onRefresh: _onRefresh,
+              onRefresh: _fetchData,
               enablePullDown: true,
               header: MaterialClassicHeader(),
               child: Column(
@@ -161,7 +165,7 @@ class _HomePageState extends State<HomePage> {
   SmartRefresher _buildErrorWidget() {
     return SmartRefresher(
       controller: _controller,
-      onRefresh: _onRefresh,
+      onRefresh: _fetchData,
       enablePullDown: true,
       header: MaterialClassicHeader(),
       child: Container(
