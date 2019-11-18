@@ -1,0 +1,82 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_unit_testing/bloc/fetch_weather_event.dart';
+import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
+import 'package:flutter_unit_testing/bloc/weather_bloc.dart';
+import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:flutter_unit_testing/repository/location_repository.dart';
+import 'package:flutter_unit_testing/repository/weather_repository.dart';
+import 'package:mockito/mockito.dart';
+
+class MockWeatherRepository extends Mock implements WeatherRepository {}
+
+class MockLocationRepository extends Mock implements LocationRepository {}
+
+class MockWeatherModel extends Mock implements WeatherModel {}
+
+void main() {
+  group('Weather bloc', () {
+    MockWeatherRepository mockWeatherRepository;
+    MockLocationRepository mockLocationRepository;
+    WeatherBloc weatherBloc;
+
+    setUp(() {
+      mockLocationRepository = MockLocationRepository();
+      mockWeatherRepository = MockWeatherRepository();
+      weatherBloc = WeatherBloc(mockWeatherRepository, mockLocationRepository);
+    });
+
+    tearDown(() {
+      resetMockitoState();
+    });
+    test('should handle fetch weather event', () {
+      final expectedWeatherModel = MockWeatherModel();
+      final mapCoordinate = MapCoordinate(1.0, -1.0);
+      when(mockLocationRepository.getCurrentLocation()).thenAnswer((_) {
+        return Future.value(mapCoordinate);
+      });
+      when(mockWeatherRepository.getWeatherWithLocation(mapCoordinate))
+          .thenAnswer((_) {
+        return Future.value(expectedWeatherModel);
+      });
+
+      weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());
+
+      expectLater(weatherBloc.weatherModel, emits(expectedWeatherModel))
+          .then((_) {
+        verify(mockLocationRepository.getCurrentLocation());
+        verify(mockWeatherRepository.getWeatherWithLocation(mapCoordinate));
+      });
+    });
+
+    test('should rethrow error on get location error', () {
+      when(mockLocationRepository.getCurrentLocation()).thenAnswer((_) {
+        return Future.error('error');
+      });
+
+      weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());
+
+      expectLater(weatherBloc.weatherModel, emitsError('error')).then((_) {
+        verify(mockLocationRepository.getCurrentLocation());
+        verifyZeroInteractions(mockWeatherRepository);
+      });
+    });
+
+    test('should rethrow error on get weather error', () {
+      final mapCoordinate = MapCoordinate(0, 0);
+      when(mockLocationRepository.getCurrentLocation()).thenAnswer((_) {
+        return Future.value(mapCoordinate);
+      });
+      when(mockWeatherRepository.getWeatherWithLocation(mapCoordinate))
+          .thenAnswer((_) {
+        return Future.error('error');
+      });
+
+      weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());
+
+      expectLater(weatherBloc.weatherModel, emitsError('error')).then((_) {
+        verify(mockLocationRepository.getCurrentLocation());
+        verify(mockWeatherRepository.getWeatherWithLocation(mapCoordinate));
+      });
+    });
+  });
+}

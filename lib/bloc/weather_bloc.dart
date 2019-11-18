@@ -21,8 +21,7 @@ class WeatherBloc {
   void _handleEvent(FetchWeatherEvent event) async {
     try {
       final currentLocation = await _locationRepository.getCurrentLocation();
-      final weather = await _weatherRepository.getWeatherWithLocation(
-          currentLocation.latitude, currentLocation.longitude);
+      final weather = await _weatherRepository.getWeatherWithLocation(currentLocation);
       _weatherStateController.sink.add(weather);
     } catch (e) {
       _weatherStateController.sink.addError(e);
