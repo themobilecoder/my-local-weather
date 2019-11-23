@@ -11,6 +11,7 @@ import 'package:flutter_unit_testing/widgets/bottom_wave_clipper.dart';
 import 'package:flutter_unit_testing/widgets/five_day_weather_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,8 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final RefreshController _controller =
       RefreshController(initialRefresh: false);
-  final WeatherBloc weatherBloc =
-      WeatherBloc(MetaweatherRepository(Dio()), GeolocatorRepository());
+  final WeatherBloc weatherBloc = WeatherBloc(
+      MetaweatherRepository(Dio()), GeolocatorRepository(Geolocator()));
 
   void _fetchData() async {
     weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());

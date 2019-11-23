@@ -3,9 +3,9 @@ import 'package:flutter_unit_testing/repository/location_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GeolocatorRepository implements LocationRepository {
-  final Geolocator _geolocator = Geolocator();
+  final Geolocator _geolocator;
 
-  GeolocatorRepository();
+  GeolocatorRepository(this._geolocator);
 
   Future<MapCoordinate> getCurrentLocation() {
     return _geolocator
