@@ -7,11 +7,12 @@ import 'package:flutter_unit_testing/bloc/weather_bloc.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
 import 'package:flutter_unit_testing/repository/geolocator_repository.dart';
 import 'package:flutter_unit_testing/repository/metawather_repository.dart';
+import 'package:flutter_unit_testing/repository/metaweather_util.dart';
 import 'package:flutter_unit_testing/widgets/bottom_wave_clipper.dart';
 import 'package:flutter_unit_testing/widgets/five_day_weather_widget.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,7 +23,8 @@ class _HomePageState extends State<HomePage> {
   final RefreshController _controller =
       RefreshController(initialRefresh: false);
   final WeatherBloc weatherBloc = WeatherBloc(
-      MetaweatherRepository(Dio()), GeolocatorRepository(Geolocator()));
+      MetaweatherRepository(Dio(), MetaweatherUtil()),
+      GeolocatorRepository(Geolocator()));
 
   void _fetchData() async {
     weatherBloc.inputWeatherEvent.add(FetchWeatherEvent());

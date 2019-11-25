@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
 import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:flutter_unit_testing/repository/metaweather_util.dart';
 import 'package:flutter_unit_testing/repository/weather_repository.dart';
 
 class MetaweatherRepository implements WeatherRepository {
@@ -8,19 +9,9 @@ class MetaweatherRepository implements WeatherRepository {
   final locationUri = "https://www.metaweather.com/api/location/search";
 
   final Dio _dio;
+  final MetaweatherUtil _metaweatherUtil;
 
-  MetaweatherRepository(this._dio);
-
-  Future<WeatherModel> getWeather() async {
-    try {
-      final Response response = await _dio.get(weatherUri);
-      final weatherData = response.data;
-      return WeatherModel.fromMappedJson(weatherData);
-    } catch (e) {
-      print(e);
-      throw e;
-    }
-  }
+  MetaweatherRepository(this._dio, this._metaweatherUtil);
 
   Future<WeatherModel> getWeatherWithLocation(
       MapCoordinate mapCoordinate) async {
@@ -28,13 +19,12 @@ class MetaweatherRepository implements WeatherRepository {
       final Response locationResponse = await _dio.get(_buildLocationUri(
           mapCoordinate.latitude.toString(),
           mapCoordinate.longitude.toString()));
-      final String locationId = locationResponse.data[0]['woeid'].toString();
+      final String locationId =
+          _metaweatherUtil.jsonToLocationId(locationResponse.data);
       final Response weatherResponse =
           await _dio.get(_buildWeatherUri(locationId));
-      final weatherData = weatherResponse.data;
-      return WeatherModel.fromMappedJson(weatherData);
+      return _metaweatherUtil.jsonToWeatherModel(weatherResponse.data);
     } catch (e) {
-      print(e);
       throw e;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_unit_testing/bloc/fetch_weather_event.dart';
 import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
@@ -10,8 +11,6 @@ import 'package:mockito/mockito.dart';
 class MockWeatherRepository extends Mock implements WeatherRepository {}
 
 class MockLocationRepository extends Mock implements LocationRepository {}
-
-class MockWeatherModel extends Mock implements WeatherModel {}
 
 void main() {
   group('Weather bloc', () {
@@ -29,7 +28,7 @@ void main() {
       resetMockitoState();
     });
     test('should handle fetch weather event', () {
-      final expectedWeatherModel = MockWeatherModel();
+      final expectedWeatherModel = WeatherModel(20, 'Sydney', 'Sunny', Icons.cloud, []);
       final mapCoordinate = MapCoordinate(1.0, -1.0);
       when(mockLocationRepository.getCurrentLocation()).thenAnswer((_) {
         return Future.value(mapCoordinate);
