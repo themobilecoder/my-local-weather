@@ -25,8 +25,8 @@ class MetaweatherUtil {
         currentTemp, location, condition, currentIcon, weatherForecasts);
   }
 
-  String jsonToLocationId(List<dynamic> json) {
-    return json[0]['woeid'].toString();
+  String jsonToLocationId(List<dynamic> jsonList) {
+    return jsonList[0]['woeid'].toString();
   }
 
   IconData _convertWeatherToIconData(String weatherAbbreviation) {

@@ -25,5 +25,5 @@ class WeatherForecast extends Equatable {
   WeatherForecast(this.day, this.iconData, this.max, this.min);
 
   @override
-  List<Object> get props => [day, iconData, max, min];
+  List<Object> get props => [day, max, min];
 }
