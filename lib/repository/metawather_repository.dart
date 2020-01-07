@@ -13,6 +13,7 @@ class MetaweatherRepository implements WeatherRepository {
 
   MetaweatherRepository(this._dio, this._metaweatherUtil);
 
+  @override
   Future<WeatherModel> getWeatherWithLocation(
       MapCoordinate mapCoordinate) async {
     try {

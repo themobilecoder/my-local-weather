@@ -7,6 +7,7 @@ class GeolocatorRepository implements LocationRepository {
 
   GeolocatorRepository(this._geolocator);
 
+  @override
   Future<MapCoordinate> getCurrentLocation() {
     return _geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.low)
