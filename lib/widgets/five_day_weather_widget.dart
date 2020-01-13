@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
 
 class FiveDayWeatherWidget extends StatelessWidget {
   final List<WeatherForecast> weatherForecasts;

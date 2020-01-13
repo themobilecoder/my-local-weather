@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:flutter_unit_testing/repository/metaweather_util.dart';
-import 'package:flutter_unit_testing/repository/weather_repository.dart';
+import 'package:my_local_weather/bloc/map_coordinate.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
+import 'package:my_local_weather/repository/metaweather_util.dart';
+import 'package:my_local_weather/repository/weather_repository.dart';
 
 class MetaweatherRepository implements WeatherRepository {
   final weatherUri = "https://www.metaweather.com/api/location";

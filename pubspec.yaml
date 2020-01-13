@@ -1,5 +1,5 @@
-name: flutter_unit_testing
-description: A flutter project to demonstrate unit testing.
+name: my_local_weather
+description: A simple local weather app.
 version: 1.0.0+1
 
 environment:

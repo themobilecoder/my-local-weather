@@ -1,4 +1,4 @@
-package com.example.flutter_unit_testing
+package com.example.my_local_weather
 
 import android.os.Bundle
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter_unit_testing/bloc/fetch_weather_event.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:flutter_unit_testing/repository/location_repository.dart';
-import 'package:flutter_unit_testing/repository/weather_repository.dart';
+import 'package:my_local_weather/bloc/fetch_weather_event.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
+import 'package:my_local_weather/repository/location_repository.dart';
+import 'package:my_local_weather/repository/weather_repository.dart';
 
 class WeatherBloc {
   final _weatherStateController = StreamController<WeatherModel>();
@@ -21,7 +21,8 @@ class WeatherBloc {
   void _handleEvent(FetchWeatherEvent event) async {
     try {
       final currentLocation = await _locationRepository.getCurrentLocation();
-      final weather = await _weatherRepository.getWeatherWithLocation(currentLocation);
+      final weather =
+          await _weatherRepository.getWeatherWithLocation(currentLocation);
       _weatherStateController.sink.add(weather);
     } catch (e) {
       _weatherStateController.sink.addError(e);

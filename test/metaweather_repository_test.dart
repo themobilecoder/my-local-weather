@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:flutter_unit_testing/repository/metawather_repository.dart';
-import 'package:flutter_unit_testing/repository/metaweather_util.dart';
+import 'package:my_local_weather/bloc/map_coordinate.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
+import 'package:my_local_weather/repository/metawather_repository.dart';
+import 'package:my_local_weather/repository/metaweather_util.dart';
 import 'package:mockito/mockito.dart';
 
 class MockDio extends Mock implements Dio {}

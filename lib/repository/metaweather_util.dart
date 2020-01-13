@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -58,10 +58,6 @@ class MetaweatherUtil {
 
   static String _convertDateToDay(String dateString) {
     final DateTime date = DateTime.parse(dateString);
-    if (DateTime.now().weekday == date.weekday) {
-      return 'NOW';
-    } else {
-      return DateFormat(DateFormat.ABBR_WEEKDAY).format(date).toUpperCase();
-    }
+    return DateFormat(DateFormat.ABBR_WEEKDAY).format(date).toUpperCase();
   }
 }

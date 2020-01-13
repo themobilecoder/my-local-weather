@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_unit_testing/home_page.dart';
+import 'package:my_local_weather/home_page.dart';
 
 class WeatherApp extends StatelessWidget {
   @override

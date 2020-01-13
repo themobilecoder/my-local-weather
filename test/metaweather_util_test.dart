@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:flutter_unit_testing/repository/metaweather_util.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
+import 'package:my_local_weather/repository/metaweather_util.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 void main() {
@@ -37,7 +37,7 @@ void main() {
       test('should get weather forcasts', () {
         expect(weatherModel.weatherForcasts.length, equals(5));
         expect(weatherModel.weatherForcasts[0],
-            equals(WeatherForecast('NOW', WeatherIcons.rain_wind, '12', '9')));
+            equals(WeatherForecast('TUE', WeatherIcons.rain_wind, '12', '9')));
         expect(weatherModel.weatherForcasts[1],
             equals(WeatherForecast('WED', WeatherIcons.rain_wind, '10', '8')));
         expect(weatherModel.weatherForcasts[2],

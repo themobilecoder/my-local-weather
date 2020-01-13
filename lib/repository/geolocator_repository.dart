@@ -1,5 +1,5 @@
-import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
-import 'package:flutter_unit_testing/repository/location_repository.dart';
+import 'package:my_local_weather/bloc/map_coordinate.dart';
+import 'package:my_local_weather/repository/location_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GeolocatorRepository implements LocationRepository {

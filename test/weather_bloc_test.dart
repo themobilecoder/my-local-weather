@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_unit_testing/bloc/fetch_weather_event.dart';
-import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
-import 'package:flutter_unit_testing/bloc/weather_bloc.dart';
-import 'package:flutter_unit_testing/bloc/weather_model.dart';
-import 'package:flutter_unit_testing/repository/location_repository.dart';
-import 'package:flutter_unit_testing/repository/weather_repository.dart';
+import 'package:my_local_weather/bloc/fetch_weather_event.dart';
+import 'package:my_local_weather/bloc/map_coordinate.dart';
+import 'package:my_local_weather/bloc/weather_bloc.dart';
+import 'package:my_local_weather/bloc/weather_model.dart';
+import 'package:my_local_weather/repository/location_repository.dart';
+import 'package:my_local_weather/repository/weather_repository.dart';
 import 'package:mockito/mockito.dart';
 
 class MockWeatherRepository extends Mock implements WeatherRepository {}
@@ -28,7 +28,8 @@ void main() {
       resetMockitoState();
     });
     test('should handle fetch weather event', () {
-      final expectedWeatherModel = WeatherModel(20, 'Sydney', 'Sunny', Icons.cloud, []);
+      final expectedWeatherModel =
+          WeatherModel(20, 'Sydney', 'Sunny', Icons.cloud, []);
       final mapCoordinate = MapCoordinate(1.0, -1.0);
       when(mockLocationRepository.getCurrentLocation()).thenAnswer((_) {
         return Future.value(mapCoordinate);

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_unit_testing/bloc/map_coordinate.dart';
-import 'package:flutter_unit_testing/repository/geolocator_repository.dart';
+import 'package:my_local_weather/bloc/map_coordinate.dart';
+import 'package:my_local_weather/repository/geolocator_repository.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 
