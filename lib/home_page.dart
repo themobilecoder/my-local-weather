@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              'Error has occurred. Please refresh and try again',
+              'Error has occurred. Make sure you have internet connectoin and location permission is allowed then try again.',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Montserrat',
