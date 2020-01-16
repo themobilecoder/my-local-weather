@@ -1,4 +1,4 @@
-package com.example.my_local_weather
+package com.themobilecoder.my_local_weather
 
 import android.os.Bundle
 
